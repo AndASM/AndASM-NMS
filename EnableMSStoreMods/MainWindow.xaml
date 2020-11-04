@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:windows="clr-namespace:AndASM_NMS.Windows;assembly=AndASM-NMS.Windows"
+	xmlns:windows="clr-namespace:AndASM_NMS.Windows;assembly=Windows"
 	x:Class="AndASM_NMS.EnableMSStoreMods.MainWindow"
 	mc:Ignorable="d"
 	Title="MainWindow" ResizeMode="NoResize" SizeToContent="WidthAndHeight">

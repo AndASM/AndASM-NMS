@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.SaveNodeNameHasher", "AndASM-NMS.SaveNodeNameHasher\AndASM-NMS.SaveNodeNameHasher.csproj", "{70255AC7-3DF8-4B81-9221-CF2F1CE19F36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SaveNodeNameHasher", "SaveNodeNameHasher\AndASM-NMS.SaveNodeNameHasher.csproj", "{70255AC7-3DF8-4B81-9221-CF2F1CE19F36}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.Util", "AndASM-NMS.Utils\AndASM-NMS.Util.csproj", "{864132DC-1622-4CFB-84FF-9695BFCFDBF1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\AndASM-NMS.Util.csproj", "{864132DC-1622-4CFB-84FF-9695BFCFDBF1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7E459F8F-CAED-4720-86C9-2C6FA197C0B0}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.PSArc", "AndASM-NMS.PSArc\AndASM-NMS.PSArc.csproj", "{D26D5D43-ADB7-405A-BEE5-F408B5545D63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PSArc", "PSArc\AndASM-NMS.PSArc.csproj", "{D26D5D43-ADB7-405A-BEE5-F408B5545D63}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.EnableMSStoreMods", "AndASM-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj", "{49F45769-805A-482E-80D1-A1DBAAC094EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnableMSStoreMods", "EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj", "{49F45769-805A-482E-80D1-A1DBAAC094EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.Windows", "AndASM-NMS.Windows\AndASM-NMS.Windows.csproj", "{D22FF46F-06FD-423D-9582-BF877E9C30E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Windows", "Windows\AndASM-NMS.Windows.csproj", "{D22FF46F-06FD-423D-9582-BF877E9C30E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

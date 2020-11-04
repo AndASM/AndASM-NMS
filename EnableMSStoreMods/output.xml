@@ -1,6 +1,6 @@
 <!--
 ============================================================================================================================================
-C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj
+C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\EnableMSStoreMods.csproj
 ============================================================================================================================================
 -->
 <Project DefaultTargets="Build">
@@ -150,7 +150,7 @@ C:\Program Files\dotnet\sdk\5.0.100-preview.5.20279.10\Current\Microsoft.Common.
 ============================================================================================================================================
   <Import Project="$(MSBuildProjectExtensionsPath)$(MSBuildProjectFile).*.props" Condition="'$(ImportProjectExtensionProps)' == 'true' and exists('$(MSBuildProjectExtensionsPath)')">
 
-C:\Users\Andrew\source\own\Andys-NMS\obj\AndASM-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj.nuget.g.props
+C:\Users\Andrew\source\own\Andys-NMS\obj\EnableMSStoreMods\EnableMSStoreMods.csproj.nuget.g.props
 ============================================================================================================================================
 -->
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' " xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -992,7 +992,7 @@ C:\Program Files\dotnet\sdk\5.0.100-preview.5.20279.10\Sdks\Microsoft.NET.Sdk.Wi
 ============================================================================================================================================
   </Import>
 
-C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj
+C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\EnableMSStoreMods.csproj
 ============================================================================================================================================
 -->
   <PropertyGroup>
@@ -1014,7 +1014,7 @@ C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\AndASM-NMS.Enab
     <PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AndASM-NMS.Windows\AndASM-NMS.Windows.csproj" />
+    <ProjectReference Include="..\Windows\Windows.csproj" />
   </ItemGroup>
   <!--
 ============================================================================================================================================
@@ -8253,7 +8253,7 @@ C:\Program Files\dotnet\sdk\5.0.100-preview.5.20279.10\Microsoft.Common.targets
 ============================================================================================================================================
   <Import Project="$(MSBuildProjectExtensionsPath)$(MSBuildProjectFile).*.targets" Condition="'$(ImportProjectExtensionTargets)' == 'true' and exists('$(MSBuildProjectExtensionsPath)')">
 
-C:\Users\Andrew\source\own\Andys-NMS\obj\AndASM-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj.nuget.g.targets
+C:\Users\Andrew\source\own\Andys-NMS\obj\EnableMSStoreMods\EnableMSStoreMods.csproj.nuget.g.targets
 ============================================================================================================================================
 -->
   <PropertyGroup xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
@@ -8297,7 +8297,7 @@ C:\Users\Andrew\.nuget\packages\system.runtime.windowsruntime\4.6.0\buildTransit
 ============================================================================================================================================
   </Import>
 
-C:\Users\Andrew\source\own\Andys-NMS\obj\AndASM-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj.nuget.g.targets
+C:\Users\Andrew\source\own\Andys-NMS\obj\EnableMSStoreMods\EnableMSStoreMods.csproj.nuget.g.targets
 ============================================================================================================================================
 -->
   <!--
@@ -8387,7 +8387,7 @@ C:\Users\Andrew\.nuget\packages\ilrepack.lib.msbuild.task\2.0.18.1\build\ILRepac
 ============================================================================================================================================
   </Import>
 
-C:\Users\Andrew\source\own\Andys-NMS\obj\AndASM-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj.nuget.g.targets
+C:\Users\Andrew\source\own\Andys-NMS\obj\EnableMSStoreMods\EnableMSStoreMods.csproj.nuget.g.targets
 ============================================================================================================================================
 -->
   <!--</ImportGroup>-->
@@ -13605,7 +13605,7 @@ C:\Program Files\dotnet\sdk\5.0.100-preview.5.20279.10\Sdks\Microsoft.NET.Sdk.Wi
 ============================================================================================================================================
   </Import>
 
-C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\AndASM-NMS.EnableMSStoreMods.csproj
+C:\Users\Andrew\source\own\Andys-NMS\Andys-NMS.EnableMSStoreMods\EnableMSStoreMods.csproj
 ============================================================================================================================================
 -->
 </Project>

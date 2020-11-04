@@ -7,6 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Andys-NMS.Utils\AndASM-NMS.Util.csproj" />
+		<ProjectReference Include="..\Util\AndASM-NMS.Util.csproj" />
 	</ItemGroup>
 </Project>
