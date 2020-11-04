@@ -1,0 +1,21 @@
+<Project>
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Configurations>Debug;Release</Configurations>
+		<Platforms>x64</Platforms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Platform)'=='x64'">
+		<PlatformTarget>x64</PlatformTarget>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)'=='Release'">
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+</Project>

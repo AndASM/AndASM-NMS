@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>AndASM_NMS.PSArc</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="KaitaiStruct.Runtime.CSharp" Version="0.9.0" />
+		<KaitaiFiles Include="*.ksy" />
+	</ItemGroup>
+
+	<Target Name="KaitaiStructCompile" BeforeTargets="BeforeCompile" DependsOnTargets="PrepareForBuild;GetReferenceAssemblyPaths" Inputs="@(KaitaiFiles)" Outputs="$(BaseIntermediateOutputPath)%(KaitaiFiles.Filename).cs">
+		<Exec Command="kaitai-struct-compiler.bat -t csharp -d $(BaseIntermediateOutputPath) --dotnet-namespace $(RootNamespace) %(KaitaiFiles.Identity)" Outputs="$(BaseIntermediateOutputPath)%(KaitaiFiles.Filename).cs">
+			<Output TaskParameter="Outputs" ItemName="Compile" />
+			<Output TaskParameter="Outputs" ItemName="FileWrites" />
+		</Exec>
+	</Target>
+</Project>

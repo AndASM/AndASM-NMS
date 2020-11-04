@@ -1,0 +1,10 @@
+<!--EXTERNAL_PROPERTIES: MSBuildThisFileDirectory-->
+<Project>
+	<PropertyGroup>
+		<SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+		<OutputPath>$(SolutionDir)$(Configuration)\$(MSBuildProjectName)</OutputPath>
+		<BaseIntermediateOutputPath>$(SolutionDir)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<CustomAfterMicrosoftCommonProps>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)Common.Solution.props'))</CustomAfterMicrosoftCommonProps>
+		<CustomAfterMicrosoftCommonTargets>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)Common.Solution.targets'))</CustomAfterMicrosoftCommonTargets>
+	</PropertyGroup>
+</Project>
