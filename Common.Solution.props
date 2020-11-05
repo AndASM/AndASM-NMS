@@ -1,8 +1,29 @@
 <Project>
 	<PropertyGroup>
-		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+
+	<!-- Package Metadata -->
+	<PropertyGroup>
+		<GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+		<GenerateAssemblyInformationalVersionAttribute>true</GenerateAssemblyInformationalVersionAttribute>
+
+		<Product>AndASM-NMS</Product>
+		<PackageLicenseExpression>GPL-3.0-ONLY</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/AndASM/AndASM-NMS</PackageProjectUrl>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/AndASM/ANMSMEMSPC</RepositoryUrl>
+		<Copyright>Copyright © 2020 AndASM</Copyright>
+		<Authors>AndASM</Authors>
+
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+		<!-- GitVersion -->
+		<UpdateAssemblyInfo>false</UpdateAssemblyInfo>
+		<GetVersion>true</GetVersion>
+		<UpdateVersionProperties>true</UpdateVersionProperties>
 	</PropertyGroup>
 
 	<PropertyGroup>

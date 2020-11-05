@@ -1,8 +1,11 @@
 <!--EXTERNAL_PROPERTIES: MSBuildThisFileDirectory-->
 <Project>
 	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+
 		<SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
 		<OutputPath>$(SolutionDir)$(Configuration)\$(MSBuildProjectName)</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<BaseIntermediateOutputPath>$(SolutionDir)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
 		<CustomAfterMicrosoftCommonProps>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)Common.Solution.props'))</CustomAfterMicrosoftCommonProps>
 		<CustomAfterMicrosoftCommonTargets>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)Common.Solution.targets'))</CustomAfterMicrosoftCommonTargets>

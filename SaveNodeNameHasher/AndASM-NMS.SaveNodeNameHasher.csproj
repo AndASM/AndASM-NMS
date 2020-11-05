@@ -2,11 +2,11 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
-		<RootNamespace>AndASM_NMS.SaveNameHasher</RootNamespace>
+		<RootNamespace>AndASM_NMS.SaveNodeNameHasher</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Util\AndASM-NMS.Util.csproj" />
+		<ProjectReference Include="..\Windows\AndASM-NMS.Windows.csproj" />
 	</ItemGroup>
 </Project>

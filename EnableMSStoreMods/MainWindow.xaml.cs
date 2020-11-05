@@ -29,7 +29,7 @@ namespace AndASM_NMS.EnableMSStoreMods
 
 		private void ShortcutModsClick(object sender, RoutedEventArgs e)
 		{
-			NmsUwpPackage.ModsFolder.CreateDesktopShortcut();
+			NmsUwpPackage.ModsFolder.CreateDesktopShortcut("No Man's Sky Mods");
 		}
 	}
 }

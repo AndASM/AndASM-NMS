@@ -1,0 +1,8 @@
+{
+	"profiles": {
+		"AndASM-NMS.SaveNodeNameHasher": {
+			"commandName": "Project",
+			"commandLineArgs": "Version PlayerStateData"
+		}
+	}
+}

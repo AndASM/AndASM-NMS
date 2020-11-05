@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -63,32 +62,6 @@ namespace AndASM_NMS.Windows
 			Write($"{text}{NewLine}");
 		}
 
-		public static void WriteIntroduction()
-		{
-			WriteLine(
-				$"{FgBrightYellow}ANMSMEMSPC ({Normal}v{Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion}{FgBrightYellow}): " +
-				$"{FgBrightCyan}Andy's NMS Mod Enabler for the Microsoft Store / Xbox GamePass PC edition.");
-			WriteLine(
-				$"{Normal}Nexus Mods: {FgBrightWhite}{Underline}https://www.nexusmods.com/nomanssky/mods/1751{NoUnderline} ");
-			WriteLine(
-				$"{Normal}Source Code: {FgBrightWhite}{Underline}https://github.com/AndASM/ANMSMEMSPC{NoUnderline}{Normal} ");
-			WriteLine("License: GPL-3.0-only");
-			WriteBlankLine();
-		}
-
-		public static void WriteExplanation()
-		{
-			WriteInfo($"{Normal}You shouldn't have to run this again unless you reinstall No Man's Sky.");
-			WriteBlankLine();
-			WriteInfo("There is a hidden system file named disablemods.txt in the PCBANKS folder.");
-			WriteInfo("It is a reparse point tombstone marker. It's what hides/deletes DISABLEDMODS.TXT.");
-			WriteNameValue("You may need to first run this console command before you can delete that file",
-				"fsutil reparsepoint delete disablemods.txt");
-			WriteBlankLine();
-			WriteInfo("Of course... why would you want to do that? That would disable mods again.");
-			WriteBlankLine();
-		}
-
 		public static void WriteInfo(string info)
 		{
 			WriteLine($"{Normal}{info}");
@@ -98,6 +71,11 @@ namespace AndASM_NMS.Windows
 		{
 			WriteLine($"{Normal}{name}:{NewLine}" +
 			          $"{FgBrightWhite}\t{value}{Normal}");
+		}
+
+		public static void WriteKeyTabValue(string name, string value)
+		{
+			WriteLine($"{FgBrightGreen}{name}\t{FgBrightYellow}{value}{Normal}");
 		}
 
 		public static void WriteBlankLine()

@@ -1,8 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices.ComTypes;
 using Windows.Storage;
-using Vanara.Windows.Shell;
+using Vanara.PInvoke;
 
 namespace AndASM_NMS.Windows
 {
@@ -31,10 +32,16 @@ namespace AndASM_NMS.Windows
 			Process.Start("explorer.exe", folder.Path);
 		}
 
-		public static void CreateDesktopShortcut(this StorageFolder folder)
+		public static void CreateDesktopShortcut(this StorageFolder folder, string linkName,
+			string linkDescription = null)
 		{
-			ShellLink.Create(Path.Combine(ShellFolder.Desktop.FileSystemPath, "No Man's Sky Mods.lnk"), folder.Path,
-				"No Man's Sky Mods");
+			var lnkPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{linkName}.lnk");
+			var lnk = new Shell32.IShellLinkW();
+			var lnkFile = (IPersistFile)lnk;
+
+			lnk.SetPath(folder.Path);
+			lnk.SetDescription(linkDescription ?? linkName);
+			lnkFile.Save(lnkPath, true);
 		}
 	}
 }

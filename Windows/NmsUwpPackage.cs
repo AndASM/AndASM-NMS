@@ -9,7 +9,7 @@ using Windows.ApplicationModel;
 using Windows.Management.Core;
 using Windows.Management.Deployment;
 using Windows.Storage;
-using AndASM_NMS.Util;
+using Microsoft.Win32;
 
 namespace AndASM_NMS.Windows
 {
@@ -25,7 +25,16 @@ namespace AndASM_NMS.Windows
 		{
 			var packageManager = new PackageManager();
 			_uwpPackage = packageManager.FindPackagesForUser("").FirstOrDefault(package =>
-				package.Id.Name.Equals("HelloGames.NoMansSky", StringComparison.CurrentCultureIgnoreCase));
+				package.Id.Name.StartsWith("HelloGames.NoMansSky", StringComparison.OrdinalIgnoreCase));
+			if (_uwpPackage == null)
+			{
+				var packages = Registry.CurrentUser.OpenSubKey(
+					@"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
+				var uwpName = packages.GetSubKeyNames().First(name =>
+					name.IndexOf("HelloGames.NoMansSky", StringComparison.OrdinalIgnoreCase) >= 0);
+				_uwpPackage = packageManager.FindPackageForUser("", uwpName);
+			}
+
 			if (_uwpPackage != null)
 			{
 				XElement gameManifest;
@@ -78,12 +87,17 @@ namespace AndASM_NMS.Windows
 			set {
 				if (value)
 					_disableModsTxt.CreateWciTombstone();
-				else if (_disableModsTxt.Exists) _disableModsTxt.Delete();
+				else if (_disableModsTxt.Exists)
+				{
+					_disableModsTxt.Delete();
+					_disableModsTxt.Refresh(); // For some reason Delete doesn't invalidate the cache!
+				}
+
 				NotifyPropertyChanged();
 			}
 		}
 
-		private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+		private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}

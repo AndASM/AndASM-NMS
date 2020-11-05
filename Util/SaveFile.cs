@@ -1,9 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using B2R2;
-using B2R2.FrontEnd;
 using SpookilySharp;
 
 namespace AndASM_NMS.Util
@@ -27,51 +22,6 @@ namespace AndASM_NMS.Util
 					output[i] += 6;
 
 			return Encoding.UTF8.GetString(output);
-		}
-
-		public static HashSet<string> ReadNMS()
-		{
-			var isIdentifier = new Regex(@"^[A-Z]{1,4}([a-z][a-z0-9_-]*([A-Z][a-z0-9_-]*)*)?$",
-				RegexOptions.CultureInvariant | RegexOptions.Compiled);
-			var handler = BinHandler.Init(ISA.OfString("amd64"),
-				@"E:\SteamLibrary\steamapps\common\No Man's Sky\Binaries\NMS.exe");
-
-			var rdata = handler.FileInfo.GetSections(".rdata").First();
-
-			var address = rdata.Address;
-			var endAddr = rdata.Address + rdata.Size;
-
-			var stringList = new List<string>();
-			var listList = new List<List<string>> {stringList};
-			while (address < endAddr)
-			{
-				string str;
-				try
-				{
-					str = handler.ReadASCII(address);
-				}
-				catch
-				{
-					break;
-				}
-
-				if (str.Length > 0)
-				{
-					address += (ulong)str.Length;
-					if (isIdentifier.IsMatch(str))
-						stringList.Add(str);
-					else if (stringList.Count > 0)
-					{
-						stringList = new List<string>();
-						listList.Add(stringList);
-					}
-				}
-				else
-					address += 1;
-			}
-
-			return new HashSet<string>(listList
-				.SelectMany(L => L));
 		}
 	}
 }

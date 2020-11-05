@@ -1,17 +1,13 @@
-using System;
-using System.Linq;
 using AndASM_NMS.Util;
+using AndASM_NMS.Windows;
 
 namespace AndASM_NMS.SaveNodeNameHasher
 {
-	internal class Program
+	internal static class Program
 	{
-		private static void Main()
+		private static void Main(string[] args)
 		{
-			var foundWords = SaveFile.ReadNMS().Select(word => (SaveFile.HashName(word), word)).GroupBy(x => x.Item1)
-				.Where(g => g.Count() > 1);
-
-			Console.WriteLine(foundWords);
+			foreach (var word in args) ColorConsole.WriteKeyTabValue(word, SaveFile.HashName(word));
 		}
 	}
 }

@@ -21,7 +21,8 @@
 			TargetKind="SameAsPrimaryAssembly"
 			KeyFile="$(KeyFile)"
 			OutputFile="$(OutputPath)$(TargetName)$(TargetExt)"
-			LibraryPath="$(OutputPath)" />
+			LibraryPath="$(OutputPath)"
+			Union="true" />
 	</Target>
 	<Target
 		AfterTargets="ILRepacker"

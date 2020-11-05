@@ -1,19 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
 		<RootNamespace>AndASM_NMS.Windows</RootNamespace>
-		<LangVersion>8.0</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Windows.SDK.Contracts" Version="10.0.18362.2005" />
 		<PackageReference Include="Vanara.PInvoke.Kernel32" Version="3.2.19" />
-		<PackageReference Include="Vanara.SystemServices" Version="3.2.19" />
-		<PackageReference Include="Vanara.Windows.Shell" Version="3.2.19" />
+		<PackageReference Include="Vanara.PInvoke.Shell32" Version="3.2.19" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Utils\AndASM-NMS.Util.csproj" />
+	  <ProjectReference Include="..\Util\AndASM-NMS.Util.csproj" />
 	</ItemGroup>
 </Project>
