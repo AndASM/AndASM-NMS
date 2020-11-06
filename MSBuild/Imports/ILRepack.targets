@@ -1,39 +1,107 @@
 <Project>
 	<ItemGroup>
-		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" IncludeAssets="none" ExcludeAssets="all" GeneratePathProperty="true" />
+		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" IncludeAssets="none" ExcludeAssets="all"
+		                  GeneratePathProperty="true" />
 	</ItemGroup>
 
 	<UsingTask AssemblyFile="$(PkgILRepack_Lib_MSBuild_Task)\build\ILRepack.Lib.MSBuild.Task.dll" TaskName="ILRepack" />
 
-	<Target Name="ILRepacker" AfterTargets="Build" Condition="$(Configuration.Contains('Release'))">
+	<Target Name="ILRepackCalculateInputs" DependsOnTargets="$(StaticLinkDependsOn)"
+	        BeforeTargets="$(StaticLinkCalculateInputsBefore)"
+	        Condition="'$(StaticLinkReferences)' == 'true'">
+
+		<!-- Default missing properties -->
+		<PropertyGroup>
+			<CopyBuildOutputToOutputDirectory Condition="'$(CopyBuildOutputToOutputDirectory)'==''">true</CopyBuildOutputToOutputDirectory>
+			<CopyOutputSymbolsToOutputDirectory Condition="'$(CopyOutputSymbolsToOutputDirectory)'==''">true</CopyOutputSymbolsToOutputDirectory>
+			<CopyDocumentationFileToOutputDirectory Condition="'$(CopyDocumentationFileToOutputDirectory)'==''">true</CopyDocumentationFileToOutputDirectory>
+		</PropertyGroup>
+
+		<!-- Compute StaticLinkAssemblies -->
 		<ItemGroup>
-			<InputAssemblies Include="$(OutputPath)$(TargetName)$(TargetExt)" />
-			<InputAssemblies Include="$(OutputPath)*.dll" Exclude="$(OutputPath)$(TargetName)$(TargetExt)" />
+			<StaticLinkAssemblies Include="@(IntermediateAssembly)"
+			                      Condition="'$(CopyBuildOutputToOutputDirectory)' == 'true' and
+										'$(SkipCopyBuildProduct)' != 'true'" />
+			<StaticLinkAssemblies Include="@(IntermediateRefAssembly)"
+			                      Condition="'$(ProduceReferenceAssembly)' == 'true' and 
+										'$(CopyBuildOutputToOutputDirectory)' == 'true' and 
+										'$(SkipCopyBuildProduct)' != 'true'" />
+			<StaticLinkAssemblies Include="$(IntermediateOutputPath)$(_SGenDllName)"
+			                      Condition="'$(_SGenDllCreated)'=='true'" />
+
+			<StaticLinkAssemblies Include="@(IntermediateSatelliteAssembliesWithTargetPath)"
+			                      Condition="'@(IntermediateSatelliteAssembliesWithTargetPath)' != ''" />
+
+			<StaticLinkAssemblies Include="@(ReferenceComWrappersToCopyLocal)"
+			                      Condition="'@(ReferenceComWrappersToCopyLocal)' != '' or
+											 '@(ResolvedIsolatedComModules)' != '' or 
+											 '@(_DeploymentLooseManifestFile)' != '' or 
+											 '@(NativeReferenceFile)' != '' " />
+			<StaticLinkAssemblies Include="@(WinMDExpArtifacts)"
+			                      Condition="'$(SkipCopyWinMDArtifact)' != 'true' and
+											 '@(WinMDExpArtifacts)' != ''" />
+
+			<StaticLinkAssemblies Include="@(ReferenceCopyLocalPaths)"
+			                      Condition="'$(UseCommonOutputDirectory)' != 'true' and
+											 '%(ReferenceCopyLocalPaths.Extension)' == '.dll'" />
 		</ItemGroup>
 
+		<!-- Rewrite IntermediateAssembly for future tasks -->
+		<ItemGroup>
+			<IntermediateAssembly
+				Include="%(IntermediateAssembly.RootDir)%(IntermediateAssembly.Directory)StaticLinked\%(IntermediateAssembly.Filename)%(IntermediateAssembly.Extension)" />
+		</ItemGroup>
 
+		<!-- Remove StaticLinkAssemblies from Items for future tasks -->
+		<ItemGroup>
+			<IntermediateAssembly Remove="@(StaticLinkAssemblies)" />
+			<IntermediateRefAssembly Remove="@(StaticLinkAssemblies)" />
+			<IntermediateSatelliteAssembliesWithTargetPath Remove="@(StaticLinkAssemblies)" />
+			<ReferenceComWrappersToCopyLocal Remove="@(StaticLinkAssemblies)" />
+			<WinMDExpArtifacts Remove="@(StaticLinkAssemblies)" />
+			<ReferenceCopyLocalPaths Remove="@(StaticLinkAssemblies)" />
+		</ItemGroup>
+
+		<!-- Remove StaticLinkAssemblies from Items-like properties -->
+		<PropertyGroup>
+			<_SGenDllCreated>false</_SGenDllCreated>
+		</PropertyGroup>
+
+		<!-- Remove duplicates -->
 		<RemoveDuplicates
-			Inputs="@(InputAssemblies)">
+			Inputs="@(StaticLinkAssemblies)">
 			<Output
 				TaskParameter="Filtered"
-				ItemName="FilteredInputAssemblies" />
+				ItemName="_FilteredStaticLinkAssemblies" />
 		</RemoveDuplicates>
+		<ItemGroup>
+			<StaticLinkAssemblies Remove="@(StaticLinkAssemblies)" />
+			<StaticLinkAssemblies Include="@(_FilteredStaticLinkAssemblies)" />
+		</ItemGroup>
+	</Target>
 
+	<Target Name="ILRepack" DependsOnTargets="ILRepackCalculateInputs" BeforeTargets="$(StaticLinkBefore)"
+	        Condition="$(Configuration.Contains('Release')) and '$(StaticLinkReferences)' == 'true'">
+		<ItemGroup>
+			<_StaticLinkLibraryPaths Include="%(StaticLinkAssemblies.RootDir)%(StaticLinkAssemblies.Directory)"/>
+		</ItemGroup>
 		<ILRepack
 			Parallel="true"
 			DebugInfo="false"
 			AllowDuplicateResources="false"
-			InputAssemblies="@(FilteredInputAssemblies)"
+			InputAssemblies="@(StaticLinkAssemblies)"
 			TargetKind="SameAsPrimaryAssembly"
 			KeyFile="$(KeyFile)"
-			OutputFile="$(OutputPath)$(TargetName)$(TargetExt)"
-			LibraryPath="$(OutputPath)"
-			Union="true" />
+			OutputFile="%(IntermediateAssembly.Identity)"
+			LibraryPath="@(_StaticLinkLibraryPaths)"
+			Union="true"
+			Verbose="$(Verbose)" />
 	</Target>
 	<Target
-		AfterTargets="ILRepacker"
+		AfterTargets="ILRepack"
 		Name="CleanReferenceCopyLocalPathsILRepacker"
-		Condition="$(Configuration.Contains('Release')) and '$(ClearOutputDirectory)' != 'False'">
+		Condition="$(Configuration.Contains('Release')) and '$(ClearOutputDirectory)' != 'False' and 1 == 2">
+
 		<Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
 		<ItemGroup>
 			<Directories

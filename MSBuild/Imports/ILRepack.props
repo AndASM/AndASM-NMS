@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup>
+		<Verbose>true</Verbose>
+		<StaticLinkReferences>false</StaticLinkReferences>
+		<StaticLinkDependsOn>ComputeIntermediateSatelliteAssemblies; _CheckForCompileOutputs;_SGenCheckForOutputs</StaticLinkDependsOn>
+		<StaticLinkBefore>CopyFilesToOutputDirectory</StaticLinkBefore>
+		<StaticLinkCalculateInputsBefore>_CopyFilesMarkedCopyLocal</StaticLinkCalculateInputsBefore>
+	</PropertyGroup>
+</Project>
