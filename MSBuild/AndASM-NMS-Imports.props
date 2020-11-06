@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup>
+		<AndASM-NMS-Dir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))\</AndASM-NMS-Dir>
+		<AndASM-NMS-Imports>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\Imports'))\</AndASM-NMS-Imports>
+
+		<OutputPath Condition="'$(OutputPath)' == ''">$(SolutionDir)build\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+		<BaseIntermediateOutputPath>$(SolutionDir)build\obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
+		<CustomAfterMicrosoftCommonProps>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\Common.Solution.props'))</CustomAfterMicrosoftCommonProps>
+		<CustomAfterMicrosoftCommonTargets>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\Common.Solution.targets'))</CustomAfterMicrosoftCommonTargets>
+	</PropertyGroup>
+</Project>

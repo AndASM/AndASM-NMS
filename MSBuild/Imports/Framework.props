@@ -1,0 +1,9 @@
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
+
+		<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<LangVersion>8.0</LangVersion>
+	</PropertyGroup>
+</Project>

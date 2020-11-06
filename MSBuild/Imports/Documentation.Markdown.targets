@@ -1,0 +1,10 @@
+<Project>
+	<Target Name="PreReleaseBuild" AfterTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+		<ItemGroup>
+			<None Include="$(SolutionDir)*.md" pack="true" >
+				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			</None>
+		</ItemGroup>
+	</Target>
+</Project>

@@ -1,0 +1,10 @@
+<Project>
+	<PropertyGroup>
+		<Solution-CommonProps>IO$([System.IO.Path]::GetFullPath('$(SolutionDir)Common.Solution.props'))</Solution-CommonProps>
+		<Solution-CommonTargets>IO$([System.IO.Path]::GetFullPath('$(SolutionDir)Common.Solution.targets'))</Solution-CommonTargets>
+	</PropertyGroup>
+
+	<Import Project="$(AndASM-NMS-Imports)**\*.props" />
+
+	<Import Project="$(Solution-CommonProps)" Condition="Exists('$(Solution-CommonProps)')" />
+</Project>
