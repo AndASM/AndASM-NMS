@@ -1,10 +1,19 @@
 <!--EXTERNAL_PROPERTIES: MSBuildThisFileDirectory-->
 <Project>
 	<PropertyGroup>
+	<DependentProject-HasDirectoryBuildProps>false</DependentProject-HasDirectoryBuildProps>
+		<DependentProject-DirectoryBuildProps>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))</DependentProject-DirectoryBuildProps>
+		<DependentProject-HasDirectoryBuildProps Condition="exists('$(DependentProject-DirectoryBuildProps)')">true</DependentProject-HasDirectoryBuildProps>
+	</PropertyGroup>
+
+	<Import Project="$(DependentProject-DirectoryBuildProps)"
+	        Condition="$(DependentProject-HasDirectoryBuildProps) == 'true'" />
+
+	<PropertyGroup Condition="$(DependentProject-HasDirectoryBuildProps) != 'true'">
 		<TargetFramework>net472</TargetFramework>
 
-		<SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
-		<OutputPath>$(SolutionDir)$(Configuration)\$(MSBuildProjectName)</OutputPath>
+		<SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
+		<OutputPath Condition="'$(OutputPath)' == ''">$(SolutionDir)$(Configuration)\$(MSBuildProjectName)</OutputPath>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<BaseIntermediateOutputPath>$(SolutionDir)obj\$(MSBuildProjectName)</BaseIntermediateOutputPath>
 		<CustomAfterMicrosoftCommonProps>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)Common.Solution.props'))</CustomAfterMicrosoftCommonProps>

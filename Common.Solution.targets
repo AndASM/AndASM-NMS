@@ -5,4 +5,15 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+
+	<Target Name="PreReleaseBuild" AfterTargets="PreBuildEvent" Condition="'$(Configuration)'=='Release'">
+		<ItemGroup>
+			<None Include="$(SolutionDir)*.md" pack="true" >
+				<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+				<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			</None>
+		</ItemGroup>
+	</Target>
+
+	<Import Project="$(DependentProject-Targets)" Condition="'$(AndyNMS-Targets.ToLower())' != '$(DependentProject-Targets.ToLower())' and Exists('$(DependentProject-Targets)')" />
 </Project>
