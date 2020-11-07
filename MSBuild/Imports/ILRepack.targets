@@ -8,7 +8,8 @@
 
 	<Target Name="ILRepackCalculateInputs" DependsOnTargets="$(StaticLinkDependsOn)"
 	        BeforeTargets="$(StaticLinkCalculateInputsBefore)"
-	        Condition="'$(StaticLinkReferences)' == 'true'">
+	        Condition="'$(StaticLinkReferences)' == 'true' and
+						$(Configuration.Contains('Release'))">
 
 		<!-- Default missing properties -->
 		<PropertyGroup>
@@ -94,23 +95,8 @@
 			KeyFile="$(KeyFile)"
 			OutputFile="%(IntermediateAssembly.Identity)"
 			LibraryPath="@(_StaticLinkLibraryPaths)"
-			Union="true"
+			Union="$(StaticLinkUnion)"
+			Internalize="$(StaticLinkInternalize)"
 			Verbose="$(Verbose)" />
 	</Target>
-	<Target
-		AfterTargets="ILRepack"
-		Name="CleanReferenceCopyLocalPathsILRepacker"
-		Condition="$(Configuration.Contains('Release')) and '$(ClearOutputDirectory)' != 'False' and 1 == 2">
-
-		<Delete Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
-		<ItemGroup>
-			<Directories
-				Include="$([System.IO.Directory]::GetDirectories('$(OutDir)%(DestinationSubDirectory)', '*', System.IO.SearchOption.AllDirectories))" />
-			<Directories>
-				<Files>$([System.IO.Directory]::GetFiles("%(Directories.Identity)", "*", System.IO.SearchOption.AllDirectories).get_Length())</Files>
-			</Directories>
-		</ItemGroup>
-		<RemoveDir Directories="@(Directories)" Condition="%(Files)=='0'" />
-	</Target>
-
 </Project>

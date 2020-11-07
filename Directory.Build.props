@@ -12,5 +12,5 @@
 		<SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
 	</PropertyGroup>
 
-	<Import Project="$(SolutionDir)Imports\AndASM-NMS-Imports.props" Condition="$(DependentProject-HasDirectoryBuildProps) != 'true'"/>
+	<Import Project="$(SolutionDir)MSBuild\AndASM-NMS-Imports.props" Condition="$(DependentProject-HasDirectoryBuildProps) != 'true'"/>
 </Project>
