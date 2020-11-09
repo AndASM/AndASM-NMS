@@ -1,5 +1,5 @@
 <Project>
-	<ItemGroup Condition="'$(ILRepackLink)' == 'true'">
+	<ItemGroup>
 		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" IncludeAssets="none" ExcludeAssets="all"
 		                  GeneratePathProperty="true" />
 	</ItemGroup>
