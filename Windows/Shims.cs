@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
 using Windows.Storage;
-using Vanara.PInvoke;
+using AndASM_NMS.Windows.Win32;
 
 namespace AndASM_NMS.Windows
 {
@@ -15,10 +15,10 @@ namespace AndASM_NMS.Windows
 		public static StorageFolder CreateFolderPath(this StorageFolder parent, string path)
 		{
 			var directories = path.Split(DirectorySeparators, StringSplitOptions.RemoveEmptyEntries);
-			var current = parent;
+			var current     = parent;
 			foreach (var directory in directories)
 				current = current.CreateFolderAsync(directory, CreationCollisionOption.OpenIfExists).GetAwaiter()
-					.GetResult();
+								 .GetResult();
 			return current;
 		}
 
@@ -33,10 +33,10 @@ namespace AndASM_NMS.Windows
 		}
 
 		public static void CreateDesktopShortcut(this StorageFolder folder, string linkName,
-			string linkDescription = null)
+												 string             linkDescription = null)
 		{
 			var lnkPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), $"{linkName}.lnk");
-			var lnk = new Shell32.IShellLinkW();
+			var lnk     = new IShellLink();
 			var lnkFile = (IPersistFile)lnk;
 
 			lnk.SetPath(folder.Path);

@@ -17,7 +17,7 @@ namespace AndASM_NMS.Windows
 	{
 		private readonly ApplicationData _appData;
 		private readonly HashSet<string> _capabilities;
-		private readonly FileInfo _disableModsTxt;
+		private readonly FileInfo        _disableModsTxt;
 
 		private readonly Package _uwpPackage;
 
@@ -31,7 +31,9 @@ namespace AndASM_NMS.Windows
 				var packages = Registry.CurrentUser.OpenSubKey(
 					@"SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\Repository\Packages");
 				var uwpName = packages.GetSubKeyNames().First(name =>
-					name.IndexOf("HelloGames.NoMansSky", StringComparison.OrdinalIgnoreCase) >= 0);
+																  name.IndexOf(
+																	  "HelloGames.NoMansSky",
+																	  StringComparison.OrdinalIgnoreCase) >= 0);
 				_uwpPackage = packageManager.FindPackageForUser("", uwpName);
 			}
 
@@ -39,18 +41,19 @@ namespace AndASM_NMS.Windows
 			{
 				XElement gameManifest;
 				using var manifestFileStream = _uwpPackage.InstalledLocation.GetFileAsync(@"AppxManifest.xml")
-					.GetAwaiter()
-					.GetResult().OpenStreamForReadAsync().GetAwaiter().GetResult();
+														  .GetAwaiter()
+														  .GetResult().OpenStreamForReadAsync().GetAwaiter()
+														  .GetResult();
 				gameManifest = XElement.Load(manifestFileStream);
 
 				_capabilities = gameManifest.DescendantsAndSelf()
-					.Where(element => element.Name.LocalName == "Capability")
-					.Select(element => element.Attribute("Name")?.Value).ToHashSet();
+											.Where(element => element.Name.LocalName == "Capability")
+											.Select(element => element.Attribute("Name")?.Value).ToHashSet();
 				_appData = ApplicationDataManager.CreateForPackageFamily(FamilyName);
 
 				InstallFolder = _appData.LocalCacheFolder.CreateFolderPath(@"Local\Microsoft\WritablePackageRoot");
 				PcBanksFolder = InstallFolder.CreateFolderPath(@"GAMEDATA\PCBANKS");
-				ModsFolder = PcBanksFolder.CreateFolderPath(@"MODS");
+				ModsFolder    = PcBanksFolder.CreateFolderPath(@"MODS");
 
 				_disableModsTxt = new FileInfo(Path.Combine(PcBanksFolder.Path, @"DISABLEMODS.TXT"));
 
@@ -66,7 +69,7 @@ namespace AndASM_NMS.Windows
 
 		public StorageFolder PcBanksFolder { get; }
 		public StorageFolder InstallFolder { get; }
-		public StorageFolder ModsFolder { get; }
+		public StorageFolder ModsFolder    { get; }
 
 		public event PropertyChangedEventHandler PropertyChanged;
 

@@ -1,8 +1,10 @@
 <Project>
 	<PropertyGroup>
-		<StaticLinkReferences>false</StaticLinkReferences>
+		<ILRepackLink>false</ILRepackLink>
 		<StaticLinkDependsOn>ComputeIntermediateSatelliteAssemblies; _CheckForCompileOutputs;_SGenCheckForOutputs</StaticLinkDependsOn>
 		<StaticLinkBefore>CopyFilesToOutputDirectory</StaticLinkBefore>
+		<IntermediateLinkDir Condition=" '$(IntermediateLinkDir)' == '' ">$(BaseIntermediateOutputPath)linked\</IntermediateLinkDir>
+		<StaticLinkDir Condition=" '$(StaticLinkDir)' == '' ">$(IntermediateLinkDir)\ilrepack</StaticLinkDir>
 		<StaticLinkCalculateInputsBefore>_CopyFilesMarkedCopyLocal</StaticLinkCalculateInputsBefore>
 		<StaticLinkInternalize>true</StaticLinkInternalize>
 		<StaticLinkUnion>true</StaticLinkUnion>

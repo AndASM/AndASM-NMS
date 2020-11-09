@@ -1,0 +1,5 @@
+<Project>
+	<PropertyGroup>
+		<ILRepackLink Condition="'$(Configuration)'=='Release'">true</ILRepackLink>
+	</PropertyGroup>
+</Project>

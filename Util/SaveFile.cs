@@ -7,9 +7,9 @@ namespace AndASM_NMS.Util
 	{
 		public static string HashName(string name)
 		{
-			var output = new byte[3];
+			var output  = new byte[3];
 			var message = Encoding.UTF8.GetBytes(name);
-			var hash = message.SpookyHash128(0, message.Length, 8268756125562466087, 8268756125562466087);
+			var hash    = message.SpookyHash128(0, message.Length, 8268756125562466087, 8268756125562466087);
 
 			// Character set starts at '0' UTF-8, 68 characters, with an offset of +6 after 'Z'
 			// Character set: "0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxy"

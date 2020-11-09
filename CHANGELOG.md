@@ -23,7 +23,7 @@ Versioning is handled by GitVersion
   * Overridable with solution-level Common.Solution.[props|targets] files
   * Common tasks
     - ILRepack based linker
-	  * enable with StaticLinkReferences=true
+	  * enable with ILRepackLink=true
 	- Zip and ZipDir tasks
 	  * Lifted from: https://github.com/moozzyk/MSBuild-Tasks
 	  * Update to use RoslynCodeTaskFactory

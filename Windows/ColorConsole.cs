@@ -10,24 +10,24 @@ namespace AndASM_NMS.Windows
 {
 	public static class ColorConsole
 	{
-		private const int STD_OUTPUT_HANDLE = -11;
+		private const int  STD_OUTPUT_HANDLE                  = -11;
 		private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
-		private const uint DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
+		private const uint DISABLE_NEWLINE_AUTO_RETURN        = 0x0008;
 
 		public const char Esc = '\u001b';
 
-		public static readonly string NewLine = Environment.NewLine;
-		public static readonly string Normal = $"{Esc}[0m";
-		public static readonly string Underline = $"{Esc}[4m";
-		public static readonly string NoUnderline = $"{Esc}[24m";
-		public static readonly string FgRed = $"{Esc}[31m";
-		public static readonly string FgYellow = $"{Esc}[33m";
-		public static readonly string FgBrightRed = $"{Esc}[91m";
-		public static readonly string FgBrightGreen = $"{Esc}[92m";
-		public static readonly string FgBrightYellow = $"{Esc}[93m";
+		public static readonly string NewLine         = Environment.NewLine;
+		public static readonly string Normal          = $"{Esc}[0m";
+		public static readonly string Underline       = $"{Esc}[4m";
+		public static readonly string NoUnderline     = $"{Esc}[24m";
+		public static readonly string FgRed           = $"{Esc}[31m";
+		public static readonly string FgYellow        = $"{Esc}[33m";
+		public static readonly string FgBrightRed     = $"{Esc}[91m";
+		public static readonly string FgBrightGreen   = $"{Esc}[92m";
+		public static readonly string FgBrightYellow  = $"{Esc}[93m";
 		public static readonly string FgBrightMagenta = $"{Esc}[95m";
-		public static readonly string FgBrightCyan = $"{Esc}[96m";
-		public static readonly string FgBrightWhite = $"{Esc}[97m";
+		public static readonly string FgBrightCyan    = $"{Esc}[96m";
+		public static readonly string FgBrightWhite   = $"{Esc}[97m";
 
 		private static readonly StringBuilder ErrorLogBuilder;
 
@@ -37,7 +37,7 @@ namespace AndASM_NMS.Windows
 			var stdOutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 			GetConsoleMode(stdOutHandle, out var ConsoleMode);
 			SetConsoleMode(stdOutHandle,
-				ConsoleMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN);
+						   ConsoleMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN);
 			ErrorLogBuilder = new StringBuilder();
 		}
 
@@ -70,7 +70,7 @@ namespace AndASM_NMS.Windows
 		public static void WriteNameValue(string name, string value)
 		{
 			WriteLine($"{Normal}{name}:{NewLine}" +
-			          $"{FgBrightWhite}\t{value}{Normal}");
+					  $"{FgBrightWhite}\t{value}{Normal}");
 		}
 
 		public static void WriteKeyTabValue(string name, string value)

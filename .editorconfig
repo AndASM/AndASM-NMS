@@ -110,3 +110,29 @@ end_of_line=crlf
 
 # Microsoft .NET properties
 csharp_preferred_modifier_order=public, private, protected, internal, abstract, new, virtual, sealed, override, static, readonly, extern, unsafe, volatile, async:suggestion
+
+# ReSharper properties
+resharper_align_linq_query=true
+resharper_align_multiline_argument=true
+resharper_align_multiline_calls_chain=true
+resharper_align_multiline_expression=true
+resharper_align_multiline_extends_list=true
+resharper_align_multiline_for_stmt=true
+resharper_align_multline_type_parameter_constrains=true
+resharper_align_multline_type_parameter_list=true
+resharper_align_tuple_components=true
+resharper_csharp_alignment_tab_fill_style=optimal_fill
+resharper_csharp_align_multiline_parameter=true
+resharper_csharp_align_multiple_declaration=true
+resharper_csharp_int_align_comments=true
+resharper_csharp_outdent_commas=true
+resharper_csharp_outdent_dots=true
+resharper_int_align_assignments=true
+resharper_int_align_fields=true
+resharper_int_align_nested_ternary=true
+resharper_int_align_parameters=true
+resharper_int_align_properties=true
+resharper_int_align_switch_expressions=true
+resharper_int_align_switch_sections=true
+resharper_int_align_variables=true
+resharper_outdent_binary_ops=true

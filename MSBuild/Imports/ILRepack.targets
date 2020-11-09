@@ -1,15 +1,15 @@
 <Project>
-	<ItemGroup>
+	<ItemGroup Condition="'$(ILRepackLink)' == 'true'">
 		<PackageReference Include="ILRepack.Lib.MSBuild.Task" Version="2.0.18.1" IncludeAssets="none" ExcludeAssets="all"
 		                  GeneratePathProperty="true" />
 	</ItemGroup>
 
-	<UsingTask AssemblyFile="$(PkgILRepack_Lib_MSBuild_Task)\build\ILRepack.Lib.MSBuild.Task.dll" TaskName="ILRepack" />
+	<UsingTask AssemblyFile="$(PkgILRepack_Lib_MSBuild_Task)\build\ILRepack.Lib.MSBuild.Task.dll" TaskName="ILRepack"
+	           Condition="'$(ILRepackLink)' == 'true'" />
 
 	<Target Name="ILRepackCalculateInputs" DependsOnTargets="$(StaticLinkDependsOn)"
 	        BeforeTargets="$(StaticLinkCalculateInputsBefore)"
-	        Condition="'$(StaticLinkReferences)' == 'true' and
-						$(Configuration.Contains('Release'))">
+	        Condition="'$(ILRepackLink)' == 'true'">
 
 		<!-- Default missing properties -->
 		<PropertyGroup>
@@ -18,73 +18,69 @@
 			<CopyDocumentationFileToOutputDirectory Condition="'$(CopyDocumentationFileToOutputDirectory)'==''">true</CopyDocumentationFileToOutputDirectory>
 		</PropertyGroup>
 
-		<!-- Compute StaticLinkAssemblies -->
+		<!-- Compute _StaticLinkAssemblies -->
 		<ItemGroup>
-			<StaticLinkAssemblies Include="@(IntermediateAssembly)"
-			                      Condition="'$(CopyBuildOutputToOutputDirectory)' == 'true' and
+			<_StaticLinkAssemblies Include="@(IntermediateAssembly)"
+			                       Condition="'$(CopyBuildOutputToOutputDirectory)' == 'true' and
 										'$(SkipCopyBuildProduct)' != 'true'" />
-			<StaticLinkAssemblies Include="@(IntermediateRefAssembly)"
-			                      Condition="'$(ProduceReferenceAssembly)' == 'true' and 
+			<_StaticLinkAssemblies Include="@(IntermediateRefAssembly)"
+			                       Condition="'$(ProduceReferenceAssembly)' == 'true' and 
 										'$(CopyBuildOutputToOutputDirectory)' == 'true' and 
 										'$(SkipCopyBuildProduct)' != 'true'" />
-			<StaticLinkAssemblies Include="$(IntermediateOutputPath)$(_SGenDllName)"
-			                      Condition="'$(_SGenDllCreated)'=='true'" />
+			<_StaticLinkAssemblies Include="$(IntermediateOutputPath)$(_SGenDllName)"
+			                       Condition="'$(_SGenDllCreated)'=='true'" />
 
-			<StaticLinkAssemblies Include="@(IntermediateSatelliteAssembliesWithTargetPath)"
-			                      Condition="'@(IntermediateSatelliteAssembliesWithTargetPath)' != ''" />
+			<_StaticLinkAssemblies Include="@(IntermediateSatelliteAssembliesWithTargetPath)"
+			                       Condition="'@(IntermediateSatelliteAssembliesWithTargetPath)' != ''" />
 
-			<StaticLinkAssemblies Include="@(ReferenceComWrappersToCopyLocal)"
-			                      Condition="'@(ReferenceComWrappersToCopyLocal)' != '' or
+			<_StaticLinkAssemblies Include="@(ReferenceComWrappersToCopyLocal)"
+			                       Condition="'@(ReferenceComWrappersToCopyLocal)' != '' or
 											 '@(ResolvedIsolatedComModules)' != '' or 
 											 '@(_DeploymentLooseManifestFile)' != '' or 
 											 '@(NativeReferenceFile)' != '' " />
-			<StaticLinkAssemblies Include="@(WinMDExpArtifacts)"
-			                      Condition="'$(SkipCopyWinMDArtifact)' != 'true' and
+			<_StaticLinkAssemblies Include="@(WinMDExpArtifacts)"
+			                       Condition="'$(SkipCopyWinMDArtifact)' != 'true' and
 											 '@(WinMDExpArtifacts)' != ''" />
 
-			<StaticLinkAssemblies Include="@(ReferenceCopyLocalPaths)"
-			                      Condition="'$(UseCommonOutputDirectory)' != 'true' and
+			<_StaticLinkAssemblies Include="@(ReferenceCopyLocalPaths)"
+			                       Condition="'$(UseCommonOutputDirectory)' != 'true' and
 											 '%(ReferenceCopyLocalPaths.Extension)' == '.dll'" />
 		</ItemGroup>
 
 		<!-- Rewrite IntermediateAssembly for future tasks -->
-		<ItemGroup>
+		<ItemGroup Condition="'@(IntermediateAssembly)' != ''">
 			<IntermediateAssembly
-				Include="%(IntermediateAssembly.RootDir)%(IntermediateAssembly.Directory)StaticLinked\%(IntermediateAssembly.Filename)%(IntermediateAssembly.Extension)" />
+				Include="$(StaticLinkDir)\%(IntermediateAssembly.Filename)%(IntermediateAssembly.Extension)" />
 		</ItemGroup>
 
-		<!-- Remove StaticLinkAssemblies from Items for future tasks -->
+		<!-- Remove _StaticLinkAssemblies from Items for future tasks -->
 		<ItemGroup>
-			<IntermediateAssembly Remove="@(StaticLinkAssemblies)" />
-			<IntermediateRefAssembly Remove="@(StaticLinkAssemblies)" />
-			<IntermediateSatelliteAssembliesWithTargetPath Remove="@(StaticLinkAssemblies)" />
-			<ReferenceComWrappersToCopyLocal Remove="@(StaticLinkAssemblies)" />
-			<WinMDExpArtifacts Remove="@(StaticLinkAssemblies)" />
-			<ReferenceCopyLocalPaths Remove="@(StaticLinkAssemblies)" />
+			<IntermediateAssembly Remove="@(_StaticLinkAssemblies)" />
+			<IntermediateRefAssembly Remove="@(_StaticLinkAssemblies)" />
+			<IntermediateSatelliteAssembliesWithTargetPath Remove="@(_StaticLinkAssemblies)" />
+			<ReferenceComWrappersToCopyLocal Remove="@(_StaticLinkAssemblies)" />
+			<WinMDExpArtifacts Remove="@(_StaticLinkAssemblies)" />
+			<ReferenceCopyLocalPaths Remove="@(_StaticLinkAssemblies)" />
 		</ItemGroup>
 
-		<!-- Remove StaticLinkAssemblies from Items-like properties -->
+		<!-- Remove _StaticLinkAssemblies from Items-like properties -->
 		<PropertyGroup>
 			<_SGenDllCreated>false</_SGenDllCreated>
 		</PropertyGroup>
 
 		<!-- Remove duplicates -->
 		<RemoveDuplicates
-			Inputs="@(StaticLinkAssemblies)">
+			Inputs="@(_StaticLinkAssemblies)">
 			<Output
 				TaskParameter="Filtered"
-				ItemName="_FilteredStaticLinkAssemblies" />
+				ItemName="StaticLinkAssemblies" />
 		</RemoveDuplicates>
-		<ItemGroup>
-			<StaticLinkAssemblies Remove="@(StaticLinkAssemblies)" />
-			<StaticLinkAssemblies Include="@(_FilteredStaticLinkAssemblies)" />
-		</ItemGroup>
 	</Target>
 
 	<Target Name="ILRepack" DependsOnTargets="ILRepackCalculateInputs" BeforeTargets="$(StaticLinkBefore)"
-	        Condition="$(Configuration.Contains('Release')) and '$(StaticLinkReferences)' == 'true'">
+	        Condition="'$(ILRepackLink)' == 'true' and '@(StaticLinkAssemblies)' != ''">
 		<ItemGroup>
-			<_StaticLinkLibraryPaths Include="%(StaticLinkAssemblies.RootDir)%(StaticLinkAssemblies.Directory)"/>
+			<_StaticLinkLibraryPaths Include="%(StaticLinkAssemblies.RootDir)%(StaticLinkAssemblies.Directory)" />
 		</ItemGroup>
 		<ILRepack
 			Parallel="true"

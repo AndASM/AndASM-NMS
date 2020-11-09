@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
-		<Solution-CommonProps>IO$([System.IO.Path]::GetFullPath('$(SolutionDir)Common.Solution.props'))</Solution-CommonProps>
-		<Solution-CommonTargets>IO$([System.IO.Path]::GetFullPath('$(SolutionDir)Common.Solution.targets'))</Solution-CommonTargets>
+		<Solution-CommonProps>$([MSBuild]::NormalizePath('$(SolutionDir)Common.Solution.props'))</Solution-CommonProps>
+		<Solution-CommonTargets>$([MSBuild]::NormalizePath('$(SolutionDir)Common.Solution.targets'))</Solution-CommonTargets>
 	</PropertyGroup>
 
 	<Import Project="$(AndASM-NMS-Imports)**\*.props" />
