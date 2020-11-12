@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace AndASM_NMS.Windows.Win32
 {
@@ -111,7 +112,7 @@ namespace AndASM_NMS.Windows.Win32
 		}
 
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		public static extern SafeHandle CreateFile(
+		public static extern SafeFileHandle CreateFile(
 			string                 lpFileName,
 			FileAccess             dwDesiredAccess,
 			FileShare              dwShareMode,

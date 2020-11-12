@@ -1,5 +1,0 @@
-<Project>
-	<Import Project="$(AndASM-NMS-Imports)**\*.targets" />
-
-	<Import Project="$(Solution-CommonTargets)" Condition="Exists('$(Solution-CommonTargets)')" />
-</Project>

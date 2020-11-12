@@ -1,4 +1,9 @@
 <!--EXTERNAL_PROPERTIES: MSBuildThisFileDirectory-->
+
+<!--
+If this is the top-level Directory.Build.props set needed properties and import build system customizations
+-->
+
 <Project>
 	<PropertyGroup>
 		<DependentProject-DirectoryBuildProps>$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))</DependentProject-DirectoryBuildProps>
@@ -6,12 +11,12 @@
 	</PropertyGroup>
 
 	<Import Project="$(DependentProject-DirectoryBuildProps)"
-	        Condition="$(DependentProject-HasDirectoryBuildProps) == 'true'" />
+	        Condition="'$(DependentProject-HasDirectoryBuildProps)' == 'true'" />
 
-	<PropertyGroup Condition="$(DependentProject-HasDirectoryBuildProps) != 'true'">
+	<PropertyGroup Condition="'$(DependentProject-HasDirectoryBuildProps)' != 'true'">
 		<SolutionDir Condition="'$(SolutionDir)' == ''">$(MSBuildThisFileDirectory)</SolutionDir>
 	</PropertyGroup>
 
-	<Import Project="$(SolutionDir)MSBuild\AndASM-NMS-Imports.props"
-	        Condition="$(DependentProject-HasDirectoryBuildProps) != 'true'" />
+	<Import Project="$(SolutionDir)**/Common/AndASM-Common-Import.props"
+	        Condition="'$(DependentProject-HasDirectoryBuildProps)' != 'true'" />
 </Project>

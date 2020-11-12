@@ -1,5 +1,6 @@
 <Project>
 	<PropertyGroup>
 		<ILRepackLink Condition="'$(Configuration)'=='Release'">true</ILRepackLink>
+		<Product>AndASM-NMS</Product>
 	</PropertyGroup>
 </Project>
