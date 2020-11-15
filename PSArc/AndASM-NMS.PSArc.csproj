@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<RootNamespace>AndASM_NMS.PSArc</RootNamespace>
 	</PropertyGroup>
@@ -7,12 +6,13 @@
 	<ItemGroup>
 		<PackageReference Include="KaitaiStruct.Runtime.CSharp" Version="0.9.0" />
 		<KaitaiFiles Include="*.ksy" />
+		<None Include="@(KaitaiFiles->'$(BaseIntermediateOutputPath)%(Filename).cs')" LinkBase="Generated"/>
+		<FileWrites Include="@(KaitaiFiles->'$(BaseIntermediateOutputPath)%(Filename).cs')" />
 	</ItemGroup>
 
 	<Target Name="KaitaiStructCompile" BeforeTargets="BeforeCompile" DependsOnTargets="PrepareForBuild;GetReferenceAssemblyPaths" Inputs="@(KaitaiFiles)" Outputs="$(BaseIntermediateOutputPath)%(KaitaiFiles.Filename).cs">
-		<Exec Command="kaitai-struct-compiler.bat -t csharp -d $(BaseIntermediateOutputPath) --dotnet-namespace $(RootNamespace) %(KaitaiFiles.Identity)" Outputs="$(BaseIntermediateOutputPath)%(KaitaiFiles.Filename).cs">
+		<Exec Command="kaitai-struct-compiler -t csharp -d $(BaseIntermediateOutputPath) --no-auto-read --dotnet-namespace $(RootNamespace) %(KaitaiFiles.Identity)" Outputs="$(BaseIntermediateOutputPath)%(KaitaiFiles.Filename).cs">
 			<Output TaskParameter="Outputs" ItemName="Compile" />
-			<Output TaskParameter="Outputs" ItemName="FileWrites" />
 		</Exec>
 	</Target>
 </Project>

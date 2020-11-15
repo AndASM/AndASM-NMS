@@ -1,5 +1,5 @@
 meta:
-  id: psarc
+  id: ps_arc
   file-extension: pak
   endian: be
 

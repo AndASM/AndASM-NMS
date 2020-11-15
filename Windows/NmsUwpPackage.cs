@@ -10,6 +10,7 @@ using Windows.Management.Core;
 using Windows.Management.Deployment;
 using Windows.Storage;
 using Microsoft.Win32;
+using AndASM_NMS.Util;
 
 namespace AndASM_NMS.Windows
 {

@@ -1,5 +1,6 @@
 <Project>
 	<PropertyGroup>
+		<TargetFramework>net472</TargetFramework>
 		<ILRepackLink Condition="'$(Configuration)'=='Release'">true</ILRepackLink>
 		<Product>AndASM-NMS</Product>
 	</PropertyGroup>

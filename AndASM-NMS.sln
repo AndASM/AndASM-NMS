@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.PSArc", "PSArc\A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndASM-NMS.Windows", "Windows\AndASM-NMS.Windows.csproj", "{D22FF46F-06FD-423D-9582-BF877E9C30E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APakTool", "APakTool\APakTool.csproj", "{3C9D9072-93E5-4037-99B4-96C99D3FCCC3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,6 +45,10 @@ Global
 		{D22FF46F-06FD-423D-9582-BF877E9C30E8}.Debug|x64.Build.0 = Debug|x64
 		{D22FF46F-06FD-423D-9582-BF877E9C30E8}.Release|x64.ActiveCfg = Release|x64
 		{D22FF46F-06FD-423D-9582-BF877E9C30E8}.Release|x64.Build.0 = Release|x64
+		{3C9D9072-93E5-4037-99B4-96C99D3FCCC3}.Debug|x64.ActiveCfg = Debug|x64
+		{3C9D9072-93E5-4037-99B4-96C99D3FCCC3}.Debug|x64.Build.0 = Debug|x64
+		{3C9D9072-93E5-4037-99B4-96C99D3FCCC3}.Release|x64.ActiveCfg = Release|x64
+		{3C9D9072-93E5-4037-99B4-96C99D3FCCC3}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
