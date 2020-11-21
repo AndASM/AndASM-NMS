@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PSArc\AndASM-NMS.PSArc.csproj" />
+    <ProjectReference Include="..\PSArc\NMS.PSArc.csproj" />
   </ItemGroup>
 </Project>

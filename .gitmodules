@@ -1,5 +1,5 @@
 [submodule "AndASM-Build-Extensions"]
 	path = Build-Extensions
 	url = https://github.com/AndASM/AndASM-Build-Extensions.git
-	branch = origin/main
+	branch = main
 	update = merge

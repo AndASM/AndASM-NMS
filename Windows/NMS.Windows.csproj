@@ -15,6 +15,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Util\AndASM-NMS.Util.csproj" />
+		<ProjectReference Include="..\Util\NMS.Util.csproj" />
 	</ItemGroup>
 </Project>

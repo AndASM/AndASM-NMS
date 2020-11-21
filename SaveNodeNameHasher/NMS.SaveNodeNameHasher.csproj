@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Util\AndASM-NMS.Util.csproj" />
-		<ProjectReference Include="..\Windows\AndASM-NMS.Windows.csproj" />
+		<ProjectReference Include="..\Util\NMS.Util.csproj" />
+		<ProjectReference Include="..\Windows\NMS.Windows.csproj" />
 	</ItemGroup>
 </Project>
